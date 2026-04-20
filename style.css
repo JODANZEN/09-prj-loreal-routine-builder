@@ -203,30 +203,9 @@ body[dir="rtl"] {
   margin-top: 2px;
 }
 
-.product-card::after {
-  content: "Selected";
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: var(--loreal-red);
-  color: #fff;
-  font-size: 0.72rem;
+.card-hint.selected {
+  color: var(--loreal-red);
   font-weight: 700;
-  padding: 7px 10px;
-  border-radius: 999px;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
-}
-
-body[dir="rtl"] .product-card::after {
-  right: auto;
-  left: 14px;
-}
-
-.product-card.selected::after {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Selected products */

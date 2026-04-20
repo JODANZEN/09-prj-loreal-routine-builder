@@ -223,7 +223,9 @@ function renderProducts() {
             <h3>${escapeHtml(product.name)}</h3>
             <p class="category">${escapeHtml(formatCategory(product.category))}</p>
             <p class="product-description">${escapeHtml(product.description)}</p>
-            <p class="card-hint">Click card to select</p>
+            <p class="card-hint ${selected ? "selected" : ""}">
+              ${selected ? "Selected" : "Click card to select"}
+            </p>
           </div>
         </article>
       `;
