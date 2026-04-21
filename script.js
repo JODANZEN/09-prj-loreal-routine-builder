@@ -105,6 +105,19 @@ function renderChat() {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
+function showTyping() {
+  const el = document.createElement("div");
+  el.id = "typing-indicator";
+  el.className = "typing-indicator";
+  el.innerHTML = "<span></span><span></span><span></span>";
+  chatWindow.appendChild(el);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function hideTyping() {
+  document.getElementById("typing-indicator")?.remove();
+}
+
 function renderSelectedProducts() {
   const list = selectedProducts();
 
@@ -286,6 +299,7 @@ async function generateRoutine() {
 
   generateRoutineBtn.disabled = true;
   generateRoutineBtn.textContent = "Generating…";
+  showTyping();
 
   try {
     const response = await fetch(WORKER_ENDPOINT, {
@@ -308,8 +322,10 @@ async function generateRoutine() {
     }
 
     state.hasGeneratedRoutine = true;
+    hideTyping();
     appendMessage("assistant", data.text || "I could not generate a response.");
   } catch (error) {
+    hideTyping();
     appendMessage("assistant", `Error: ${error.message}`);
   } finally {
     generateRoutineBtn.disabled = state.selectedIds.size === 0;
@@ -321,6 +337,7 @@ async function generateRoutine() {
 
 async function sendFollowUp(messageText) {
   appendMessage("user", messageText);
+  showTyping();
 
   try {
     const response = await fetch(WORKER_ENDPOINT, {
@@ -348,8 +365,10 @@ async function sendFollowUp(messageText) {
       throw new Error(data.error || "Chat request failed.");
     }
 
+    hideTyping();
     appendMessage("assistant", data.text || "I could not generate a response.");
   } catch (error) {
+    hideTyping();
     appendMessage("assistant", `Error: ${error.message}`);
   }
 }
