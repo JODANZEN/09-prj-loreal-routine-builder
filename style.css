@@ -375,7 +375,7 @@ body[dir="rtl"] .generate-btn i {
   background: #fff;
   border: 1px solid rgba(29, 29, 31, 0.08);
   border-radius: 18px;
-  width: fit-content;
+  margin-right: auto;
 }
 
 .typing-indicator span {

@@ -10,6 +10,7 @@ const clearSelectionsBtn = document.getElementById("clearSelections");
 const chatForm = document.getElementById("chatForm");
 const chatWindow = document.getElementById("chatWindow");
 const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
 
 const WORKER_ENDPOINT = window.WORKER_ENDPOINT || "/api/chat";
 
@@ -112,10 +113,15 @@ function showTyping() {
   el.innerHTML = "<span></span><span></span><span></span>";
   chatWindow.appendChild(el);
   chatWindow.scrollTop = chatWindow.scrollHeight;
+  userInput.disabled = true;
+  sendBtn.disabled = true;
 }
 
 function hideTyping() {
   document.getElementById("typing-indicator")?.remove();
+  userInput.disabled = false;
+  sendBtn.disabled = false;
+  userInput.focus();
 }
 
 function renderSelectedProducts() {
